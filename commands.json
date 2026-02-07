@@ -1,0 +1,585 @@
+{
+  "metadata": {
+    "version": "2026.02.07",
+    "target_os": "bazzite",
+    "atomic": true,
+    "notes": "La app NO ejecuta comandos. Solo muestra y copia. Ejecuta uno a uno en KDE Konsole."
+  },
+  "hardware_catalog": {
+    "cpus": [
+      { "id": "intel_10th", "display_name": "Intel 10ª Gen (Comet Lake-S)", "family": "Intel 10th Gen", "tags": ["cpu", "intel", "gen10", "no_ecores"] },
+      { "id": "intel_11th", "display_name": "Intel 11ª Gen (Rocket Lake-S)", "family": "Intel 11th Gen", "tags": ["cpu", "intel", "gen11", "no_ecores"] },
+      { "id": "intel_12th_14th", "display_name": "Intel 12ª-14ª Gen (Alder/Raptor)", "family": "Intel 12-14th Gen", "tags": ["cpu", "intel", "gen12plus", "hybrid", "ecores"] },
+      { "id": "amd_zen2", "display_name": "AMD Ryzen Zen 2 (3000)", "family": "AMD Zen 2", "tags": ["cpu", "amd", "zen2"] },
+      { "id": "amd_zen3", "display_name": "AMD Ryzen Zen 3 (5000)", "family": "AMD Zen 3", "tags": ["cpu", "amd", "zen3"] },
+      { "id": "amd_zen4", "display_name": "AMD Ryzen Zen 4 (7000/8000G)", "family": "AMD Zen 4", "tags": ["cpu", "amd", "zen4", "am5"] },
+      { "id": "amd_zen5", "display_name": "AMD Ryzen Zen 5 (9000)", "family": "AMD Zen 5", "tags": ["cpu", "amd", "zen5", "am5"] },
+      { "id": "amd_x3d", "display_name": "AMD Ryzen X3D (gaming)", "family": "AMD X3D", "tags": ["cpu", "amd", "x3d"] }
+    ],
+    "gpus": [
+      { "id": "amd_rdna3", "display_name": "AMD Radeon RX 7000 (RDNA 3)", "family": "AMD RDNA 3", "tags": ["gpu", "amd_gpu", "rdna3", "mesa"] },
+      { "id": "amd_rdna4", "display_name": "AMD Radeon RX 9000 (RDNA 4)", "family": "AMD RDNA 4", "tags": ["gpu", "amd_gpu", "rdna4", "mesa"] },
+      { "id": "nvidia_rtx40", "display_name": "NVIDIA RTX 40 (Ada)", "family": "NVIDIA RTX 40", "tags": ["gpu", "nvidia_gpu", "rtx40"] },
+      { "id": "nvidia_rtx50", "display_name": "NVIDIA RTX 50 (Blackwell)", "family": "NVIDIA RTX 50", "tags": ["gpu", "nvidia_gpu", "rtx50"] },
+      { "id": "intel_igpu", "display_name": "Intel iGPU (UHD 630/750/770)", "family": "Intel iGPU", "tags": ["gpu", "intel_gpu", "igpu"] },
+      { "id": "amd_apu", "display_name": "AMD APU (Ryzen G / 8000G)", "family": "AMD APU", "tags": ["gpu", "amd_gpu", "apu", "igpu"] }
+    ]
+  },
+  "commands": [
+    {
+      "id": "sys_show_warning",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Aviso de seguridad (importante)",
+      "description": "Ejecuta comandos uno a uno en KDE Konsole. Verifica antes de pegar.",
+      "command": "echo 'Lee el comando, entiende el efecto, y ejecútalo de uno en uno.'",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "sys_os_info",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Ver versión de Bazzite/Fedora",
+      "description": "Muestra información del sistema operativo y kernel.",
+      "command": "cat /etc/os-release && uname -r",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_rpmostree_status",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Ver estado rpm-ostree",
+      "description": "Muestra deployment actual, capas y pendientes.",
+      "command": "rpm-ostree status",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_rpmostree_upgrade",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Actualizar sistema (rpm-ostree)",
+      "description": "Descarga actualización del sistema inmutable. Requiere reinicio.",
+      "command": "rpm-ostree upgrade",
+      "danger_level": "Medio"
+    },
+    {
+      "id": "sys_reboot",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Reiniciar",
+      "description": "Aplica cambios pendientes (rpm-ostree, drivers, etc.).",
+      "command": "systemctl reboot",
+      "danger_level": "Medio"
+    },
+    {
+      "id": "sys_flatpak_update",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Actualizar Flatpaks",
+      "description": "Actualiza todas las apps Flatpak instaladas.",
+      "command": "flatpak update -y",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_flatpak_list",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Listar Flatpaks instalados",
+      "description": "Muestra aplicaciones Flatpak instaladas y runtimes.",
+      "command": "flatpak list",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_flatpak_repair",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Reparar instalación Flatpak",
+      "description": "Repara referencias rotas y objetos faltantes.",
+      "command": "flatpak repair",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_journal_boot_errors",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Errores del arranque (journalctl)",
+      "description": "Lista errores del último boot para diagnóstico.",
+      "command": "journalctl -b -p err..alert --no-pager",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_services_failed",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Servicios fallando (systemd)",
+      "description": "Muestra unidades en estado failed.",
+      "command": "systemctl --failed",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "cpu_lscpu",
+      "category": "CPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Identificar CPU (lscpu)",
+      "description": "Muestra modelo, núcleos, hilos y flags.",
+      "command": "lscpu",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cpu_sched_debug",
+      "category": "CPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Ver política de governor por CPU",
+      "description": "Comprueba governor activo por núcleo (si existe cpufreq).",
+      "command": "grep -H . /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor 2>/dev/null | head -n 40",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cpu_freq_info",
+      "category": "CPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Frecuencia actual por núcleo",
+      "description": "Muestra MHz por CPU (si está disponible).",
+      "command": "grep -H . /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq 2>/dev/null | head -n 40",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cpu_intel_pstate_status",
+      "category": "CPU",
+      "hardware_family": "Intel 10th Gen / Intel 11th Gen / Intel 12-14th Gen",
+      "specific_models": "i5/i7/i9 10ª-14ª Gen",
+      "title": "Ver estado Intel P-State",
+      "description": "Comprueba si intel_pstate está activo y su modo.",
+      "command": "cat /sys/devices/system/cpu/intel_pstate/status 2>/dev/null; cat /sys/devices/system/cpu/intel_pstate/no_turbo 2>/dev/null",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cpu_amd_pstate_status",
+      "category": "CPU",
+      "hardware_family": "AMD Zen 2 / AMD Zen 3 / AMD Zen 4 / AMD Zen 5",
+      "specific_models": "Ryzen 3000-9000",
+      "title": "Ver estado AMD P-State",
+      "description": "Comprueba si amd-pstate está cargado.",
+      "command": "cat /sys/devices/system/cpu/amd_pstate/status 2>/dev/null || echo 'amd_pstate no disponible en este kernel/config.'",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cpu_hybrid_check",
+      "category": "CPU",
+      "hardware_family": "Intel 12-14th Gen",
+      "specific_models": "Alder Lake / Raptor Lake / Refresh",
+      "title": "Detectar CPU híbrida (P/E-cores)",
+      "description": "Comprueba si el sistema expone core types (híbrido).",
+      "command": "grep -R . /sys/devices/system/cpu/cpu*/topology/core_type 2>/dev/null | head -n 40 || echo 'No expone core_type.'",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cpu_mitigations",
+      "category": "CPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Estado mitigaciones CPU",
+      "description": "Muestra mitigaciones activas (impacto en rendimiento/seguridad).",
+      "command": "cat /sys/devices/system/cpu/vulnerabilities/* 2>/dev/null | head -n 80",
+      "danger_level": "Medio"
+    },
+
+    {
+      "id": "gpu_lspci_vga",
+      "category": "GPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Identificar GPU (lspci)",
+      "description": "Lista controladores VGA/3D y su driver en uso.",
+      "command": "lspci -nnk | grep -A3 -E 'VGA|3D|Display'",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gpu_loaded_modules",
+      "category": "GPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Módulos de GPU cargados (lsmod)",
+      "description": "Verifica si amdgpu/nvidia/i915 están cargados.",
+      "command": "lsmod | grep -E 'amdgpu|nvidia|i915|nouveau' || true",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gpu_wayland_session",
+      "category": "GPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Confirmar sesión Wayland/X11",
+      "description": "Muestra el tipo de sesión gráfica actual.",
+      "command": "echo $XDG_SESSION_TYPE",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gpu_mesa_info",
+      "category": "GPU",
+      "hardware_family": "AMD RDNA 3 / AMD RDNA 4 / Intel iGPU / AMD APU",
+      "specific_models": "RX 7000/9000, Intel UHD, Ryzen G/8000G",
+      "title": "Info Mesa/Vulkan (si está instalado)",
+      "description": "Comprueba versión de Mesa/Vulkan (requiere herramientas instaladas).",
+      "command": "vulkaninfo --summary 2>/dev/null | head -n 80 || echo 'vulkaninfo no disponible.'",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gpu_vaapi_check",
+      "category": "GPU",
+      "hardware_family": "AMD RDNA 3 / AMD RDNA 4 / Intel iGPU / AMD APU",
+      "specific_models": "RX 7000/9000, UHD, APUs",
+      "title": "Comprobar VA-API (vainfo)",
+      "description": "Verifica decodificación/encodificación hardware (AV1/H264/HEVC).",
+      "command": "vainfo 2>/dev/null | head -n 120 || echo 'vainfo no disponible.'",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "net_nmcli_status",
+      "category": "Red",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Estado de red (nmcli)",
+      "description": "Muestra interfaces, estado y conexiones activas.",
+      "command": "nmcli device status",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "net_show_iface_details",
+      "category": "Red",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Detalles de interfaz (nmcli)",
+      "description": "Muestra MTU, IP, DNS y parámetros de enlace.",
+      "command": "nmcli -p device show",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "net_ethtool_speed",
+      "category": "Red",
+      "hardware_family": "Universal",
+      "specific_models": "Intel X540-AT2 / 10GbE",
+      "title": "Velocidad/Dúplex (ethtool)",
+      "description": "Comprueba Speed y Duplex de una interfaz (ajusta el nombre).",
+      "command": "ethtool enp117s0 | grep -E 'Speed|Duplex|Auto-negotiation' || echo 'ethtool o interfaz no disponible.'",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "net_ping_gateway",
+      "category": "Red",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Ping básico a gateway",
+      "description": "Comprueba conectividad local (sustituye IP del router).",
+      "command": "ping -c 4 192.168.1.1",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "net_dns_test",
+      "category": "Red",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Prueba DNS (resolución)",
+      "description": "Comprueba resolución DNS desde terminal.",
+      "command": "getent hosts github.com",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "gaming_steam_flatpak_install",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Instalar Steam (Flatpak)",
+      "description": "Instala Steam desde Flathub si no está presente.",
+      "command": "flatpak install -y flathub com.valvesoftware.Steam",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gaming_heroic_install",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Instalar Heroic Games Launcher",
+      "description": "Epic/GOG/Amazon en Linux vía Flatpak.",
+      "command": "flatpak install -y flathub com.heroicgameslauncher.hgl",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gaming_mangohud_install",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Instalar MangoHud",
+      "description": "Overlay de métricas FPS/frametime en Vulkan/OpenGL.",
+      "command": "flatpak install -y flathub org.freedesktop.Platform.VulkanLayer.MangoHud",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gaming_gamescope_install",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Instalar Gamescope (Flatpak)",
+      "description": "Compositor para juegos; útil en Wayland.",
+      "command": "flatpak install -y flathub org.freedesktop.Platform.VulkanLayer.gamescope",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "cont_distrobox_list",
+      "category": "Contenedores",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Listar contenedores Distrobox",
+      "description": "Muestra contenedores existentes y su estado.",
+      "command": "distrobox list",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cont_distrobox_create_ubuntu",
+      "category": "Contenedores",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Crear Distrobox Ubuntu",
+      "description": "Caja de arena para pruebas sin tocar rpm-ostree.",
+      "command": "distrobox create --name ubuntu --image ubuntu:24.04",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cont_distrobox_create_arch",
+      "category": "Contenedores",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Crear Distrobox Arch",
+      "description": "Caja de arena útil para AUR sin ensuciar el host.",
+      "command": "distrobox create --name arch --image archlinux:latest",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cont_distrobox_enter_ubuntu",
+      "category": "Contenedores",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Entrar en Ubuntu (Distrobox)",
+      "description": "Abre shell dentro del contenedor ubuntu.",
+      "command": "distrobox enter ubuntu",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cont_distrobox_enter_arch",
+      "category": "Contenedores",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Entrar en Arch (Distrobox)",
+      "description": "Abre shell dentro del contenedor arch.",
+      "command": "distrobox enter arch",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "cont_podman_info",
+      "category": "Contenedores",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Info Podman (base de Distrobox)",
+      "description": "Comprueba versión y estado de Podman.",
+      "command": "podman info | head -n 120",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "sys_disk_usage",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Uso de disco (df)",
+      "description": "Mide espacio libre en particiones y /var.",
+      "command": "df -h",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_large_dirs_var",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Detectar directorios grandes en /var",
+      "description": "Útil para limpiar logs/cachés si falta espacio.",
+      "command": "sudo du -h -d 1 /var 2>/dev/null | sort -h",
+      "danger_level": "Medio"
+    },
+    {
+      "id": "sys_journal_vacuum_200m",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Reducir tamaño de logs (journalctl)",
+      "description": "Limpia logs antiguos para liberar espacio (200MB).",
+      "command": "sudo journalctl --vacuum-size=200M",
+      "danger_level": "Medio"
+    },
+    {
+      "id": "sys_rpmostree_cleanup",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Limpiar deployments antiguos (rpm-ostree)",
+      "description": "Libera espacio eliminando deployments no usados.",
+      "command": "sudo rpm-ostree cleanup -m",
+      "danger_level": "Medio"
+    },
+
+    {
+      "id": "hw_usb_list",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Mandos/Periféricos",
+      "title": "Listar USB (lsusb)",
+      "description": "Detecta mandos PS5/Xbox y dongles.",
+      "command": "lsusb",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "hw_bluetooth_status",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Mandos Bluetooth",
+      "title": "Estado Bluetooth (systemctl)",
+      "description": "Comprueba si el servicio bluetooth está activo.",
+      "command": "systemctl status bluetooth --no-pager",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "hw_bluetooth_restart",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Mandos Bluetooth",
+      "title": "Reiniciar Bluetooth",
+      "description": "Útil si no empareja el mando o hay cortes.",
+      "command": "sudo systemctl restart bluetooth",
+      "danger_level": "Medio"
+    },
+
+    {
+      "id": "gpu_amdgpu_dmesg",
+      "category": "GPU",
+      "hardware_family": "AMD RDNA 3 / AMD RDNA 4 / AMD APU",
+      "specific_models": "RX 7000/9000, APUs",
+      "title": "Logs de amdgpu (dmesg)",
+      "description": "Diagnóstico rápido si hay fallos de driver o cuelgues.",
+      "command": "dmesg --level=err,warn | grep -i amdgpu | tail -n 80",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "gpu_nvidia_dmesg",
+      "category": "GPU",
+      "hardware_family": "NVIDIA RTX 40 / NVIDIA RTX 50",
+      "specific_models": "RTX 4060-5090",
+      "title": "Logs NVIDIA (dmesg)",
+      "description": "Diagnóstico si hay errores de módulo o firmware.",
+      "command": "dmesg --level=err,warn | grep -i nvidia | tail -n 80",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "sys_list_overlays",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Ver paquetes en overlay (rpm-ostree)",
+      "description": "Lista paquetes superpuestos (capas) si existieran.",
+      "command": "rpm-ostree status | sed -n '/LayeredPackages/,$p' | head -n 60",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "dev_check_pcie_link",
+      "category": "GPU",
+      "hardware_family": "Universal",
+      "specific_models": "Todas las GPUs PCIe",
+      "title": "Comprobar enlace PCIe (lspci)",
+      "description": "Verifica velocidad/ancho de enlace PCIe de la GPU.",
+      "command": "sudo lspci -vv -s $(lspci | awk '/VGA|3D|Display/ {print $1; exit}') | grep -E 'LnkCap|LnkSta'",
+      "danger_level": "Medio"
+    },
+
+    {
+      "id": "net_route",
+      "category": "Red",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Tabla de rutas (ip)",
+      "description": "Diagnóstico de routing básico.",
+      "command": "ip route",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "net_addr",
+      "category": "Red",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "IPs por interfaz (ip)",
+      "description": "Muestra direcciones IP y estado de enlaces.",
+      "command": "ip -br addr",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "gaming_check_steam_runtime",
+      "category": "Gaming",
+      "hardware_family": "Universal",
+      "specific_models": "Steam",
+      "title": "Ver permisos Flatpak Steam",
+      "description": "Comprueba permisos de Steam Flatpak (diagnóstico).",
+      "command": "flatpak info --show-permissions com.valvesoftware.Steam | head -n 120",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "sys_time_sync",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Estado sincronización de hora",
+      "description": "Comprueba NTP/RTC y sincronización de tiempo.",
+      "command": "timedatectl status",
+      "danger_level": "Bajo"
+    },
+
+    {
+      "id": "sys_top_processes_cpu",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Top procesos por CPU (ps)",
+      "description": "Detecta procesos que consumen CPU en background.",
+      "command": "ps -eo pid,comm,%cpu,%mem --sort=-%cpu | head -n 20",
+      "danger_level": "Bajo"
+    },
+    {
+      "id": "sys_top_processes_mem",
+      "category": "Sistema",
+      "hardware_family": "Universal",
+      "specific_models": "Todos",
+      "title": "Top procesos por RAM (ps)",
+      "description": "Detecta procesos que consumen RAM.",
+      "command": "ps -eo pid,comm,%mem,%cpu --sort=-%mem | head -n 20",
+      "danger_level": "Bajo"
+    }
+  ]
+}
